@@ -1,0 +1,13 @@
+dubbo支持的8种协议
+dubbo://
+rmi://
+hessian://
+http://
+webservice://
+thrift://
+memcached://
+redis://
+
+
+
+
