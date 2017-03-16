@@ -9,5 +9,72 @@ memcached://
 redis://
 
 
+dubbo负载均衡策略
+Random LoadBalance:随机
+RoundRobin LoadBalance:轮询
+LeastActive LoadBalance:最少活跃调用数
+ConsistentHash LoadBalance:一致性哈希
+
+
+配置覆盖策略
+(1) 方法级优先，接口次之，提供方次之
+(2) 如果级别一样，则消费方优先，提供方次之
+(3) JVM启动-D参数优先，用户可以在部署和启动的时候进行参数重写
+(4) XML次之，如果在XML中有配置，则dubbo.properties中相应的配置无效
+(5) properties相当于缺省配置，只有没有被覆盖的配置才生效，通常用于公共配置
+
+
+集群容错
+dubbo提供了6种容错模式
+Failover:
+Failfast:
+Failsafe:
+Failback:
+Forking:
+Broadcast:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
