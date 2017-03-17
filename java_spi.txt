@@ -1,0 +1,27 @@
+SPI(Service Provider Interface):提供给开发者进行框架扩展的接口
+
+SPI和API的区别
+API通常是框架提供的一系列方法，每个方法用于完成特定的业务逻辑或功能，通常是给应用开发人员使用
+SPI通常是框架作者基于以后在现有框架基础上进行扩展考虑的，扩展者可以通过框架提供的SPI在不改动原有框架的基础上重新进行实现，
+并能通过简单的配置，达到和框架原有功能并存的效果，例如dubbo框架提供了dubbo、thrift等协议，我们为了满足自己的业务需求，需要
+重新定义一种协议，就可以使用dobbo框架提供的SPI进行协议实现，通过简单的配置，达到增加协议的目的。
+
+SPI具体约定
+(1) 服务提供者提供接口功能，并在jar包的META-INF/services/目录下创建一个文件，文件名为为该接口的完全限定名
+    例如:com.test.XxxInterface
+(2) 该文件的具体内容为接口具体实现的完全限定名
+    例如:com.test.XxxInterfaceImpl
+(3) 当程序装配这个模块时，通过META-INF/services/下的文件，就能找到接口和对应的实现(可以是多个),完场模块装载注入
+
+jdk提供的支持
+jdk中提供了服务实现查找的工具类：java.util.ServiceLoader
+例如:
+		ServiceLoader<Log> logs=ServiceLoader.load(Log.class);//查找Log接口提供的所有实现
+		Iterator<Log> it=logs.iterator();  //获取迭代器
+		while(it.hasNext()){
+			Log log=it.next();             //具体的实现类的实例化对象
+			log.info("hello world");
+			context.put(log.getName(), log);
+		}
+
+
