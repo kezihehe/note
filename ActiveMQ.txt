@@ -1,0 +1,29 @@
+
+spring对jms的支持
+依赖
+org.springframework
+spring-jms
+
+org.apache.activemq
+activemq-pool
+
+jmsTemplate
+
+
+
+
+ActiveMQ支持的协议
+TCP(缺省)、NIO、UDP、SSL、Http(s)、VM
+如果客户端和broker在一个虚拟机内的话，通过VM协议在VM内通讯，从而减少网络开销
+
+
+openwire:在网络传输数据前，必须要序列化数据，消息通过wire protocol来序列化成字节流。
+默认情况下，ActiveMQ把wire protocol叫做openwire，它的目的是促使网络上的效率和数据快速交互。
+
+
+消息存储(持久化)
+(1) 基于文件的存储方式，老版本默认消息存储方式
+(2) KahaDB消息存储:新版本默认存储方式
+(3) JDBC消息存储
+(4) Memory消息存储:基于内存的消息存储
+
