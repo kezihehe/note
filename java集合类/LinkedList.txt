@@ -1,0 +1,46 @@
+LinkedList是基于双向循环链表实现的，且头节点不存放数据。
+
+无参构造方法:直接创建了一个包含head节点的空链表
+包含Collection参数的构造方法:先调用无参构造方法创建一个空链表，而后将Collection中数据添加到链表的尾部。
+
+LinkedList允许存放null元素，在查找和删除元素时，分别针对null元素和非null元素做了不同的判断处理。
+
+LinkedList是基于链表实现的，因此没有容量不足的情况。
+
+Entry<E> entry(int index):返回双向链表中指定位置处的节点。然而，双向链表中是没有下标索引的，所以只能遍历
+整个链表进行处理。如果每次都是从头遍历到末尾，十分浪费性能。源码中做了一个简单的优化，就是判断指定位置是在
+整个列表的左侧还是右侧(或者是靠近头部还是尾部)，如果index在链表中间位置(size/2)的左侧(index<size/2)，则从头部开始遍历，
+如果是在右侧(index>size/2)，则从尾部开始遍历。这样虽然能稍微提高一下性能，但实际性能让然很差。
+
+LinkedList是基于链表实现的，因此插入删除效率高，查找效率低
+
+要注意源码中还实现了栈和队列的操作方法，因此也可以作为栈、队列和双端队列来使用
+
+
+
+// 双向链表的节点所对应的数据结构。    
+// 包含3部分：上一节点，下一节点，当前节点值。    
+private static class Entry<E> {    
+    // 当前节点所包含的值    
+    E element;    
+    // 下一个节点    
+    Entry<E> next;    
+    // 上一个节点    
+    Entry<E> previous;    
+  
+    /**   
+     * 链表节点的构造函数。   
+     * 参数说明：   
+     *   element  —— 节点所包含的数据   
+     *   next      —— 下一个节点   
+     *   previous —— 上一个节点   
+     */   
+    Entry(E element, Entry<E> next, Entry<E> previous) {    
+        this.element = element;    
+        this.next = next;    
+        this.previous = previous;    
+    }    
+}    
+
+
+

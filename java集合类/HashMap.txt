@@ -1,0 +1,14 @@
+HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单向链表解决冲突问题，容量不足时，自动增长。
+
+HashMap是非线程安全的，只是用于单线程环境下，多线程环境下可以采用concurrent并发包下的concurrentHashMap。
+
+HashMap 实现了Serializable接口，因此它支持序列化，实现了Cloneable接口，能被克隆。
+
+
+HashMap的key和value都可以为null
+
+HashMap的key如果为null，则元素存放在table[0]中，即0号桶中。
+
+HashMap的key通过覆写hashCode方法和equals方法来确保没有重复的key
+
+

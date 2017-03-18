@@ -1,0 +1,41 @@
+TreeMap是基于红黑树实现的。
+
+TreeMap的排序是基于对key的排序实现的，它的每一个Entry代表一个红黑树的一个节点，
+它的排序和定位需要依赖比较器或者覆写Comparable接口，因此也需要key覆写hashCode方法
+和equals方法，就可以排除掉重复的key
+
+TreeMap的查询、插入、删除效率均没有HashMap高，一般只有在需要对key排序时才使用。
+
+TreeMap的key不能为null。
+
+
+
+
+
+
+Entry结构
+   static final class Entry<K,V> implements Map.Entry<K,V> {  
+        // 键  
+        K key;  
+        // 值  
+        V value;  
+        // 左孩子  
+        Entry<K,V> left = null;  
+        // 右孩子  
+        Entry<K,V> right = null;  
+        // 父节点  
+        Entry<K,V> parent;  
+        // 当前节点颜色  
+        boolean color = BLACK;  
+ 
+        // 构造函数  
+        Entry(K key, V value, Entry<K,V> parent) {  
+            this.key = key;  
+            this.value = value;  
+            this.parent = parent;  
+        }  
+
+		.......
+   }
+
+

@@ -1,0 +1,8 @@
+HashSet是基于哈希表实现的，实际上是HashMap的存储结构，只不过HashSet中的元素存在HashMap的key中，
+因为HashMap的key不能重复，所以HashSet的元素是不重复的，HashMap的value为空
+
+元素不能有重复
+
+
+
+
