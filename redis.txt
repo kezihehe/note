@@ -1,3 +1,34 @@
+redis(Remote Dictionary Server):远程字典服务
+
+redis数据类型
+string
+list
+set
+hash
+zset
+
+
+
+redis性能高的原理
+
+
+redis持久化
+
+RDB持久化(快照持久化)
+
+
+创建快照的情况
+(1) 客户端向redis发送bgsave命令来创建快照。
+    redis接收到bgsave命令后，会调用fork来创建一个子进程(windows平台除外)，然后子进程负责将快照写入磁盘，而父进程继续处理命令请求。
+(2) 客户端向redis发送save命令来创建快照。
+    save命令在快照创建完毕之前，不再处理其他命令，客户端被阻塞。
+(3) 配置文件中配置了save配置项。
+    save 60 10000  #60秒编辑10000次触发保存(bgsave)
+	从redis最近一次创建快照之后算起，save配置项的任何一条被满足时，redis自动触发bgsava命令创建快照。
+(4) 客户端发送shutdown命令或者其他标准term信号时，执行save命令，阻塞客户端，不再处理客户端命令，并在
+    快照创建完毕后关闭服务器。
+(5) 从服务器向主服务器发送sync命令，请求同步时，主服务器会触发bgsave命令，创建快照。
+
 
 
 redis主从复制原理

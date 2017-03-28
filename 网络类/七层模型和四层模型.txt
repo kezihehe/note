@@ -1,0 +1,23 @@
+OSI(Open System Interconnection,开放系统互联)七层模型
+是一个逻辑上的定义，是一个规范，它把网络从逻辑上分成了7层。
+主要目的是解决异种网络互联时所遇到的兼容性问题。
+将服务、接口和协议这三个概念明确区分开来。
+
+
+应用层(Application Layer)
+表示层(Presentation Layer)
+会话层(Session Layer)
+传输层(Transport Layer)
+网络层(Network Layer):将网络地址翻译成对应的物理地址，并决定如何将数据从发送方路由的接收方
+数据链路层(Datalink Layer)
+物理层(Physical Layer)
+
+
+TCP/IP四层模型
+应用层
+传输层
+互联网络层
+网络接口层
+
+
+
