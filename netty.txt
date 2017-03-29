@@ -1,0 +1,12 @@
+Reactor模式
+
+netty通过Reactor模型基于多路复用器接收并处理用户请求，内部实现了两个线程池，boss线程池和work线程池，
+其中boss线程池的线程负责处理请求的accept事件，当接收到accept事件的请求时，把对应的socket封装到一个
+NioSocketChannel中，交给work线程池，其中work线程池负责请求的read和write事件。
+
+
+java nio的bug
+在linux上导致CPU 100%，使得nio的server/client不可用，这个问题在jdk 6u4才解决。
+selector的select方法，因为底层的epoll函数可能会发生空转，从而导致cpu 100%。
+
+
