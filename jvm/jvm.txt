@@ -2,11 +2,11 @@ JVM主要分为三个子系统:类加载子系统、运行时数据区、执行引擎
 
 类的生命周期
 类从被加载到虚拟机内存中开始，到卸载出内存为止，整个生命周期包含7个阶段。
-加载(Loading)
-验证(Verification)
-准备(Preparation)
-解析(Resolution)
-初始化(Initialization)
+加载(Loading):查找并加载类的二进制数据
+验证(Verification):验证被加载类的正确性
+准备(Preparation):为类的静态变量分配内存，并将其初始化为默认值
+解析(Resolution):把类中的符号引用转换为直接引用
+初始化(Initialization):为类的静态变量赋予正确的初始值，并执行静态代码块
 使用(Using)
 卸载(Unloading)
 其中验证、准备、解析这三个阶段统称为连接(Linking)。

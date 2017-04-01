@@ -1,0 +1,63 @@
+String、StringBuffer、StringBuilder的区别和联系
+
+1. 可变与不可变
+   String类中使用字符数组保存字符串，并且使用final关键字修饰，所以对象是不可变的。
+    /** The value is used for character storage. */
+    private final char value[];
+	
+	StringBuilder和StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder
+	类中也是使用字符数组保存字符串，没有使用final修饰，因为对象是可变的。
+	/**
+     * The value is used for character storage.
+     */
+    char[] value;
+
+
+2. 是否线程安全
+
+   String中对象是不可变的，也可以理解为常量，是线程安全的。
+   StringBuffer对方法增加了同步锁或者对调用的方法增加了同步锁，是线程安全的。
+   StringBuilder没有对方法增加同步锁，是非线程安全的。
+
+
+3. 执行效率
+   StringBuilder > StringBuffer > String
+   因为StringBuffer增加了synchronized关键字，效率要低一些
+   
+   
+注意：
+String str = “This is only a” + “ simple” + “test”;
+编译期自动优化为
+String str = “This is only a simple test”;
+
+
+String s1 = "myString";
+在程序编译期，编译程序首先去字符串常量池中检查，是否存在"myString"，
+如果不存在，则在常量池中开辟一个内存空间存放"myString";
+如果存在，则不用重新开辟空间。
+然后再栈空间开辟一块空间，命名为“s1”，存放常量池中"myString"的内存地址。
+String s1 = "myString";//开辟新空间
+String s2 = "myString";//不开辟空间，引用上面的内存地址
+
+
+String s1 = new String("myString");
+首先在字符串常量池中检查，是否存在"myString",
+如果不存在，则在常量池中开辟一个内存空间存放"myString";
+如果存在，则不用重新开辟空间。
+运行new String("myString")构造方法，在堆内存中创建重新创建一个字符串对象"myString",
+在堆内存开辟一个空间，保存"myString"，
+在栈空间开辟空间，命名为s1，保存堆空间的内存地址，
+如果重复创建，则重复上面步骤
+
+
+intern()方法：
+返回字符串对象的规范化表示形式
+当调用intern()方法时，
+如果池已经包含一个等于此String对象的字符串(该对象由 equals(Object) 方法确定)，则返回池中的字符串。
+否则，将此String对象添加到池中，并且返回此 String 对象的引用
+
+
+
+
+
+

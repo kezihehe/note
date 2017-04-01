@@ -1,0 +1,17 @@
+jps:JVM Process Status Tool,显示指定系统内的所有HotSpot虚拟机进程
+
+jstat:JVM Statistics Monitoring Tool,用于收集Hotspot虚拟机各方面的运行参数
+
+jinfo:Configuration Info for Java,显示虚拟机配置信息
+
+jmap:Memory Map for Java,生成虚拟机的内存转储快照(heapdump文件)
+
+jstack:Stack Trace for Java,显示虚拟机的线程快照
+
+
+
+
+
+
+
+
