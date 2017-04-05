@@ -2,7 +2,29 @@
 
 
 
+mysql事务隔离级别
+未提交读
+已提交读
+可重复读
+可串行化
 
+mysql命令行在默认情况下，事务都是自动提交的，可以通过
+begin、start transation、set autocommit = 0开启一个事务。
+
+commit提交事务
+
+commit work用来控制事务结束后的行为
+如果completion_type=0,commit work作用和commit一样
+如果completion_type=1,commit work会开启另外一个事务
+如果completion_type=2,commit work等同于commit and release,事务提交后自动断开与db的连接
+
+
+
+MVCC
+InnoDB存储引擎MVCC的实现策略
+在每一行数据中额外保存两个隐藏字段：当前行创建时的版本号和删除时的版本号(可能为空)，
+每个事务又有自己的版本号，当事务内执行CRUD操作时，就是通过版本号的比较来达到数据库版本
+控制的。
 
 
 
