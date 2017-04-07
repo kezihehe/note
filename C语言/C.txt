@@ -1,0 +1,41 @@
+struct student{  #student称为Tag
+	int age;
+	int height;
+}; #注意这个分号不能少
+
+上面代码整体是一个数据类型，类似于int，而不是变量，只不过是复合类型。
+
+普通类型变量定义
+数据类型 变量名
+int age;
+
+复合类型同样
+struct student{int age;int height;} st1,st2;  #声明复合类型变量st1和st2
+
+如果在定义结构体的同时声明变量，Tag可以省略不写
+struct {int age;int height;} st1,st2; 
+
+可以使用 struct student 来代替类型名称
+例如：
+struct student st3,st4; #声明st3,st4两个变量的类型为student
+
+访问结构体内部变量
+st1.age=12;
+st1.height=178;
+
+
+
+
+
+关键字
+struct  #结构体
+enum    #枚举
+
+
+c语言中以#开头的语法元素称为预处理指令。
+#define #定义
+
+#define LEN 5  #定义常量LEN 值为5
+
+
+
