@@ -49,7 +49,7 @@ synchronized关键字通过一个变量在同一时间只允许有一个线程对其进行加锁的规则来实现
 
 
 
-
+happens-before原则
 
 
 
