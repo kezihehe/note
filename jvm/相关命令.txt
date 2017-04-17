@@ -134,3 +134,39 @@ PGC      #永久代当前容量
 
 
 
+
+
+
+
+
+
+
+
+jinfo:java配置信息工具(Configuration Info for Java)
+作用：实时的查看和调整虚拟机各项参数
+
+
+
+
+jmap
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
