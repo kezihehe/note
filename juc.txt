@@ -1,0 +1,88 @@
+volatile关键字
+当多个线程进行操作共享数据时，可以保证内存中数据的可见性。
+相较于synchronized关键字，是一种较为轻量级的同步策略。
+
+注意：
+(1) volatile不具备“互斥性”
+    synchronized关键字具有互斥性，同一时刻只能有一个线程操作变量
+	volatile关键字同一时刻可以有多个线程操作变量，通过特殊机制同步工作内存和主内存数据
+	
+(2) volatile关键字不能保证变量的“原子性”
+
+
+
+i++原子性问题
+i++的操作实际上分为三个步骤：读-改-写
+int i = 10;
+i = i++; //结果i=10
+
+int temp = i;
+i = i + 1;
+i = temp;
+
+
+原子变量
+jdk1.5之后java.util.concurrent.atomic包下提供了常用的原子变量
+实现原理：
+(1) volalite保证内存可见性
+(2) CAS(Compare-And-Swap)算法保证数据的原子性
+    CAS算法是硬件对于并发操作共享数据的支持
+	CAS包含了三个操作数：
+	内存值：V
+	预估值：A
+	更新值：B
+	当且仅当V==A时，V=B，否则，将不做任何操作。
+	
+	
+	
+
+CountDownLatch：闭锁，在完成某些运算时，只有其他所有线程的运算全部完成，
+当前运算才继续执行。
+
+CountDownLatch latch = new CountDownLatch(10);
+
+latch.await();//等待其他线程全部完成
+latch.countDown();//某一个线程执行完成，计数器减一，该语句要放在finally中执行。
+
+
+实现多线程的四种方式
+继承Thread类
+实现Runnable接口
+实现Callable接口：该实现方法有返回值，可以跑出异常
+线程池
+
+实现Callable接口可以使用Future(实现类FutureTask)来接收结果
+FutureTask可以实现闭锁的功能
+
+
+
+
+
+
+用于解决多线程安全问题的方式3种：
+(1) 同步代码块
+(2) 同步方法
+(3) jdk1.5之后同步锁Lock
+    lock.lock()加锁，lock.unlock()解锁。解锁要在finally里执行。
+	
+	
+Object类中提供的wait()方法可以暂停当前线程，但是存在“虚假唤醒”的问题，
+解决办法是使用while循环，
+
+
+Object提供wait()、notify()、notifyAll()方法
+Condition提供await()、signal()、signalAll()方法
+
+用法：
+Lock lock = new ReentrantLock();
+Condition condition = lock.newCondition();
+condition.await();
+condition.signalAll();
+
+
+读写锁
+
+
+
+
+

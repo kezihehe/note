@@ -1,0 +1,284 @@
+不引入第三个变量，如何实现两个变量交换？
+    int a = 10;
+	int b=20;
+	a = a+b;
+	b = a-b;
+	a = a-b;
+	
+冒泡排序代码实现
+二分查找代码实现
+单例模式代码实现
+
+
+java异常体系结构
+
+    Throwable
+	    |
+		|----Error
+		|
+		|----Exception
+		        |----IOException
+				|----RuntimeException
+	
+	
+	Error:程序无法处理的错误，表示运行应用程序中严重问题。
+	
+	Exception:程序本身可以处理的异常
+	
+	java异常(Exception、Error)分为可查异常(checked exceptions)和不可查异常(unchecked exceptions)。
+	
+	() 对于可查异常必须捕捉或声明抛出，允许忽略不可查的RuntimeException和Error。
+	() 一旦某一个catch捕获到匹配的异常类型，将进入异常处理代码。处理结束后就意味着
+	整个try...catch语句结束，其他的catch子句不再有匹配和捕获异常的机会。
+	() 在try块或catch块中遇到return语句时，会先执行finally语句块中的代码，然后在执行
+	return语句，因为return语句执行意味着方法结束。
+	
+什么情况下finally中代码不会被执行？
+    (1) finally语句中发生了异常
+    (2) 在执行finally语句前，调用了System.exit()退出程序
+	(3) 程序所在线程死亡。例如线程被杀死
+	(4) 关闭CPU
+
+throws和throw区别？
+    (1) throws语句用在方法定义时声明该方法要抛出的异常类型，必须是可查异常。
+	(2) throw语句使用在方法体内，用来抛出一个Throwable类型的异常。
+	    异常抛出后，后面的代码停止执行。
+	
+自定义异常代码实现？
+    继承Exception类。
+
+Exception分为两类：
+	CheckedException：使用try...catch语句显示捕获
+	UncheckedException：又叫RuntimeException,不需要捕获
+
+异常丢失和异常链？
+    e.initCause(e1);
+
+
+
+为什么叫做重入锁(ReentrantLock)？
+    可重入锁，也叫做递归锁，指的是同一线程外层函数获得锁之后，内存递归函数仍然
+	有获取该锁的代码，但不受影响。
+	ReentrantLock将由最近成功获得锁而且没有释放该锁的线程拥有。
+	当锁没有被另一个线程拥有时，调用lock方法的线程将成功获取该锁并返回，如果当前
+	线程已经拥有该锁，此方法将立即返回。
+	
+公平锁和非公平锁
+    公平锁：多线程在等待获取同一个锁时，必须按照申请锁的先后顺序依次获得锁。
+	        效率低，但是不会出现线程饿死。
+	非公平锁：可以抢占，如果在某个时刻有线程需要获取锁，而这个时候刚好有锁可用，那么这个
+	        线程立即抢占，这时阻塞队列中等待队列中的线程不会被唤醒。
+			可能会出现线程饿死情况，最早来的，但是一直获取不到锁。
+			
+ReentrantLock和synchronized区别？
+    (1) synchronized实现同步的基础：
+        java中每个对象都可以作为锁。当线程试图访问同步代码块时，必须先获得对象锁，退出或抛出异常时，
+必须释放锁。同步代码块、同步方法
+        synchronized原理：JVM基于进入和退出Monitor对象来实现代码块同步和方法同步。		
+		代码块同步：在编译后，通过将monitorenter指令插入到同步代码块的开始位置，将monitorexit指令
+插入到方法结束位置和异常位置。
+        方法同步：synchronized方法在method_info结构有ACC_synchronized标记，线程执行时会
+		识别该标记，获取对应的锁，实现方法同步。
+	(2) Lock
+        通过显式地获取和释放锁，控制资源，比较灵活
+        synchronized是隐式获取释放锁
+	(3) synchronized是在JVM上实现的，Lock需要在代码层面上实现
+	(4) synchronized在发生异常的时候，会自动释放线程占有的锁，因此不会导致死锁
+	    Lock发生异常时，不会自动释放锁，需要在finally显式调用unlock方法，有可能造成死锁
+	(5) Lock可以让等待锁的线程响应中断，而synchronized不行，等待的线程会一直等待下去
+    (6) Lock可以知道获取锁是否成功，synchronized不能
+    (7) Lock可以提高多线程进行读操作的效率	
+		
+
+			
+
+字符串高性能翻转方法？
+    StringBuilder sb = new StringBuilder("12345");
+	sb.reverse();//翻转 结果为54321
+	
+StringBuilder、StringBuffer、String区别？
+
+TCP连接建立时3次握手和断开连接时4次握手过程？
+
+长连接和短连接？
+    TCP短连接：
+	(1) client向server端发起连接请求，经过三次握手，建立连接
+	(2) client发送消息到server
+	(3) server回复消息到client
+	(4) client发起断开连接请求，经过四次握手，断开连接
+	特点：管理起来比较简单，存在的连接都是有用的连接，不需要额外的控制手段
+	
+	TCP长连接：
+	(1) client向server端发起连接请求，经过三次握手，建立连接
+	(2) client发送消息到server
+	(3) server回复消息到client
+	(4) 该连接不断开，后续有新的请求，继续使用该连接
+
+http状态码
+    304 内容没有修改
+	408 请求超时
+	
+	
+	
+
+mysql事务隔离级别，脏读、幻读？
+	
+mysql的ACID？
+
+分布式领域CAP理论和Base思想？	
+    Consistency(一致性), 数据一致更新，所有数据变动都是同步的
+    Availability(可用性), 好的响应性能
+    Partition tolerance(分区容错性) 可靠性
+	
+	定理：任何分布式系统只能只可同时满足两点，没法三者兼顾。
+	BASE思想主要强调基本的可用性
+
+maven的生命周期？
+    maven有三套互相独立的生命周期：
+	Clean:进行构建前的清理工作
+	Default：构建核心部分，编译、测试、打包、部署
+	Site：生成项目报告、站点，发布站点
+	
+maven命令查看依赖树？
+    mvn dependency:tree
+	
+maven怎么跳过单元测试？
+    (1) mvn install -Dmaven.test.skip=true
+	(2) pom.xml文件中配置
+	 <build>
+		<plugins>
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<configuration>
+			  <skip>true</skip>
+			</configuration>
+		  </plugin>
+		</plugins>
+	  </build>
+	
+maven中如何忽略单元测试中的错误继续构建应用？	
+    (1) mvn test -Dmaven.test.failure.ignore=true
+	(2) pom.xml文件中配置
+	<build>
+		<plugins>
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<configuration>
+			  <testFailureIgnore>true</testFailureIgnore>
+			</configuration>
+		  </plugin>
+		</plugins>
+	  </build>
+	  
+
+多线程的四种实现方式？
+    (1) 继承Thread类
+	(2) 实现Runnable接口
+	(3) 实现Callable接口
+	(4) 线程池
+	
+HashMap的key可不可以使用对象？
+    (1) 如果是可变对象，存放进map中，对象改变后(hashCode)可能查询不到该数据，这种情况下不能作为key	
+	(2) 如果可变对象的成员属性改变时，对象的hashCode不会改变，可以作为key
+	(3) 不可变对象可以作为key
+	
+HashSet和HashMap的关系？
+    HashSet底层是通过HashMap实现的。key为Set的元素，value为无用的值
+	
+常用集合类的区别和联系？
+    (1) HashTable线程安全
+	    HashMap线程不安全，key可以为null
+	
+
+Vector
+ArrayList
+LinkedList
+HashSet
+TreeSet
+HashMap
+
+
+JVM垃圾回收器的种类？
+    Serial      ParNew          ParallelScavenge
+	
+	                                                   G1
+	
+	CMS         SerialOld       ParallelOld
+
+
+如何选择使用哪种垃圾回收器？
+	
+
+JVM工具？
+
+	
+	
+如何解决跨域的问题？	
+
+ThreadLocal使用场景？	
+	  
+
+redis缓存失效策略？
+	
+	
+
+代理模式？
+cglib
+
+
+
+spring核心功能？
+
+
+幂等设计：1次请求和N次请求的结果都是一样的。
+
+查询复杂度？
+    哈希表：接近于O(1)，其实最坏的情况也是O(n)
+	二分查找：O(logn)
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
