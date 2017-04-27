@@ -1,0 +1,179 @@
+ifconfig结果说明
+eth0   #eth0表示以太网的第一块网卡。eth是Ethernet的缩写
+Link encap:Ethernet  #Link encap是指封装方式为以太网 
+HWaddr 00:0C:29:D5:65:73  #网卡的硬件地址(MAC地址)
+inet addr:192.168.64.128  #网卡的IP地址
+Bcast:192.168.64.255      #广播地址，有系统根据IP和掩码算出来的
+Mask:255.255.255.0        #掩码
+inet6 addr: fe80::20c:29ff:fed5:6573/64   #IPv6地址
+Scope:Link
+UP           #网卡处于活动状态
+BROADCAST RUNNING MULTICAST  
+MTU:1500    #最大存储单元，即网卡一次所能传输的最大分包
+Metric:1
+RX packets:13851 errors:0 dropped:0 overruns:0 frame:0    #接收包
+TX packets:8584 errors:0 dropped:0 overruns:0 carrier:0   #发送包
+collisions:0    #发送冲突数，如果该值不为0，很可能存在网络故障
+txqueuelen:1000 #传输缓冲区大小                             #
+RX bytes:13193169 (12.5 MiB)  
+TX bytes:592410 (578.5 KiB)
+
+
+#手工指定eth0的IP地址
+ifconfig eth0 192.168.159.130 netmask 255.255.255.0 		  
+#简写方式
+ifconfig eth0 192.168.159.130/24
+
+
+#查看所有的网卡
+ifconfig -a
+#关闭网卡
+ifconfig eth0 down
+ifdown eth0
+
+#开启网卡
+ifconfig eth0 up
+ifup eth0
+
+
+通过ifconfig配置的网卡信息只是临时设置，一旦系统重启之后，这些信息将会丢失，
+为了能够在重启之后依然生效，可以在配置文件中保存这些信息。
+
+
+Redhat和Centos系统网络配置文件
+/etc/sysconfig/network-scripts/ifcfg-eth0 #第一块物理网卡
+/etc/sysconfig/network-scripts/ifcfg-eth1 #第二块物理网卡
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+主机名称(hostname)
+(1) 查看当前主机名
+    hostname
+	
+(2) 临时修改方案
+    hostname nginx  #修改
+	logout          #退出，重新登录后提示符显示变为最新的主机名
+	
+(3) 永久修改方案
+    ① vim /etc/sysconfig/network 修改HOSTNEME
+		NETWORKING=yes
+		HOSTNAME=nginx
+	② vim /etc/hosts 修改对应的hostname
+		127.0.0.1   localhost nginx localhost4 localhost4.localdomain4
+	③ 上述两步操作完成之后，需要重启才能生效，但是作为服务器，最好不要重启，
+	所以，可以采取hostname nginx临时设置一下，这样，重新登录一下，就可以显示
+	为新的主机名称了，并且配置文件已经生效，也是永久性修改了
+注意：如果/etc/hosts不改，以后会遇到一些问题，如sendmail启动缓慢，ldap服务解析缓慢，
+sudo切换用户缓慢等等，是因为主机名和/etc/hosts中的解析不对应导致的。
+
+
+网卡配置说明
+cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+
+DEVICE=eth0                #网卡名称
+TYPE=Ethernet              #网络类型
+ONBOOT=yes                 #开机网卡是否自启动
+NM_CONTROLLED=yes
+BOOTPROTO=dhcp             #
+DNS1=8.8.8.8               #客户端dns设置，一般不在这里配置
+HWADDR=00:0c:29:d5:65:73   #MAC地址，不同的网卡不能重复
+IPADDR                     #IP地址
+NETMASK                    #子网掩码
+GATEWAY                    #网关，上网的出口，一般为路由的IP地址
+PEERDNS=no
+
+修改网卡信息
+
+网卡配置别名 ifconfig eth0:0 ip地址 #其中0可以是0-255之间的任意整数
+
+
+DNS配置
+(1) centos5版本尽量不要在网卡(ifcfg-eth0)中配置DNS信息
+    在centos6版本中统一放在网卡中(ifcfg-eth0)，如果单独修改/etc/resolv.conf文件，
+	重启网络服务，配置文件会还原，会将ifcfg-eth0中的配置信息覆盖过来
+	在ifcfg-eth0中配置
+	DNS1=
+	DNS2=
+	
+(2) /etc/resolv.conf中配置
+    nameserver 114.114.114.114
+(3) 该DNS为本地DNS，不是DNS服务器
+
+
+
+网关
+上网的出口
+查看网关 route -n，结果的最后一条，就是默认网关
+#临时生效
+route del default gw 192.168.64.2   #删除默认网关
+route add default gw 192.168.64.2   #新增默认网关
+#/etc/sysconfig/network中配置
+GATEWAY=192.168.64.2 
+#ifcfg-eth0中配置
+GATEWAY=192.168.64.2    #优先级高于/etc/sysconfig/network中配置
+
+
+dig www.baudu.com  #查看DNS解析情况
+nslookup           #查看DNS解析情况
+
+网络状况检查
+tracert -d www.baidu.com  #windows下路由跟踪
+traceroute www.baidu.com  #linux下路由跟踪
+telnet
+nmap
+
+tcpdump    #linux抓包工具
+
+
+
+
+
+
+
+
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  

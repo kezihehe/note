@@ -1,0 +1,62 @@
+Document
+Index
+Type
+Field
+Shards
+Replicas
+
+和数据库的对比
+database       index
+table          type
+row            docment
+column         field
+
+curl使用
+curl www.baidu.com #打开一个网页
+curl -o file_name www.baidu.com #将响应输出到一个文件中，-o(output)
+-i  #显示响应头
+-v
+--trace
+
+curl -X GET/POST/PUT/DELETE www.baidu.com #发送不同的请求
+
+安装配置
+
+./bin/elasticsearch -d #后台运行
+
+http://localhost:9200 #web地址
+
+
+插件安装
+./plugin -install mobz/elasticsearch-head
+插件使用
+http://localhost:9200/_plugin/head
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
