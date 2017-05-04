@@ -1,0 +1,62 @@
+安装
+
+体验
+启动zookeeper服务器
+./bin/zookeeper-server-start.sh config/zookeeper.properties
+启动kafka服务器
+./bin/kafka-server-start config/server.properties
+创建主题test，一个分区，一个副本
+./bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+通过zk客户端查看注册到zk上的信息
+zkCli.sh -server localhost:2181
+#查看主题
+./kafka-topics.sh --list --zookeeper localhost:2181
+#发送消息
+./bin/kafka-console-producer.sh --brokeer-list localhost:9092 --topic test
+#接收消息
+./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic --from-beginning
+
+
+#搭建多个broker的kafka集群
+1.创建多个server配置文件
+  cp server.properties server-1.properties
+	  broker.id=1
+	  listeners=PLAINTEXT://:9903
+	  log.dir=/tmp/kafka-logs-1
+  cp server.properties server-2.properties
+      ...
+	  
+2.启动server
+  ./bin/kafka-server-start.sh config/server-1.properties &
+  ./bin/kafka-server-start.sh config/server-2.properties &
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

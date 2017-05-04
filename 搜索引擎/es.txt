@@ -36,6 +36,130 @@ http://localhost:9200/_plugin/head
 
 
 
+#创建索引bms_db
+curl -XPUT localhost:9200/bms_db
+
+#查看索引的设置信息
+curl -XGET localhost:9200/bms_db/_settings?pretty
+{
+  "bms_db" : {
+    "settings" : {
+      "index" : {
+        "creation_date" : "1493486353840",
+        "uuid" : "FsTS4GErRxWuXcqwLZycuw",
+        "number_of_replicas" : "1",
+        "number_of_shards" : "5",
+        "version" : {
+          "created" : "2010099"
+        }
+      }
+    }
+  }
+}
+
+#查看多个索引的设置信息，多个索引用逗号隔开
+-XGET localhost:9200/bms_db,wms_db/_settings?pretty
+{
+  "wms_db" : {
+    "settings" : {
+      "index" : {
+        "creation_date" : "1493488193791",
+        "uuid" : "eqbnA_gQQIq3UFqRDeRO0g",
+        "number_of_replicas" : "1",
+        "number_of_shards" : "5",
+        "version" : {
+          "created" : "2010099"
+        }
+      }
+    }
+  },
+  "bms_db" : {
+    "settings" : {
+      "index" : {
+        "creation_date" : "1493486353840",
+        "uuid" : "FsTS4GErRxWuXcqwLZycuw",
+        "number_of_replicas" : "1",
+        "number_of_shards" : "5",
+        "version" : {
+          "created" : "2010099"
+        }
+      }
+    }
+  }
+}
+
+#查看所有索引的设置信息
+curl -XGET localhost:9200/_all/_settings?pretty
+
+#创建类型和文档，并指定文档ID
+curl -XPUT localhost:9200/bms_db/bms_goods/1?pretty -d '{"skuId":1,"skuCode":"123"}'
+{
+  "_index" : "bms_db",
+  "_type" : "bms_goods",
+  "_id" : "1",
+  "_version" : 1,
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "created" : true
+}
+
+
+#创建文档，不指定ID的情况下，ES会自动生成ID
+{
+  "_index" : "bms_db",
+  "_type" : "bms_goods",
+  "_id" : "AVu665DwIKrjDv_DZ-yy",
+  "_version" : 1,
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "created" : true
+}
+
+#通过ID查询文档信息
+curl -XGET localhost:9200/bms_db/bms_goods/1?pretty
+{
+  "_index" : "bms_db",
+  "_type" : "bms_goods",
+  "_id" : "1",
+  "_version" : 1,
+  "found" : true,
+  "_source":{"skuId":1,"skuCode":"123"}
+}
+
+#通过_source查询指定的字段，如果想查询多个，用逗号隔开
+curl -XGET localhost:9200/bms_db/bms_goods/1?_source=skuCode
+curl -XGET localhost:9200/bms_db/bms_goods/1?_source=skuCode,skuId
+
+#使用_update更新，注意json中的doc字段
+curl -XPOST localhost:9200/bms_db/bms_goods/1/_update -d '{"doc":{"skuCode":"678"}}'
+
+#删除指定的文档
+curl -XDELETE localhost:9200/bms_db/bms_goods/1
+#删除指定类型下的所有文档和类型
+curl -XDELETE localhost:9200/bms_db/bms_goods
+#删除索引下的所有类型和索引
+curl -XDELETE localhost:9200/bms_db
+
+
+
+#查询多个
+_mget
+#批量操作
+bulk
+
+内部版本控制和外部版本控制
+
+
+
+
+
+
 
 
 
