@@ -16,6 +16,8 @@ zkCli.sh -server localhost:2181
 #接收消息
 ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic --from-beginning
 
+#查看主题描述信息
+./bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 
 #搭建多个broker的kafka集群
 1.创建多个server配置文件
