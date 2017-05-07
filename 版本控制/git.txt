@@ -1,0 +1,25 @@
+
+#提交记录在一行显示
+git log --pretty=oneline
+
+
+
+
+#使用rebase合并master上的新内容到当前分支
+git rebase master  # -i 使用交互模式
+
+#如果有冲突，解决冲突即可
+
+#冲突解决完毕之后，更新索引，标记为冲突已解决
+git add -u
+
+#继续执行rebase命令
+git rebase --continue
+
+#如果中间遇到某个补丁不需要应用，执行下面命令将其忽略
+git rebase --skip
+
+#终断rebase操作，并回到rebase执行之前的状态
+git rebase --abort
+
+

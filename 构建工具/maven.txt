@@ -1,0 +1,7 @@
+
+#如何将第三方jar包加入到本地仓库？
+mvn install:install-file -Dfile=/path/to/hello.jar -DgroupId=com.test
+-DartifactId=hello -Dversion=1.0.1.RELEASE -Dpackaging=jar
+
+
+
