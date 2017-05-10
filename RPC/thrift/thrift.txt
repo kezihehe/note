@@ -1,0 +1,52 @@
+#定义生成代码的名称空间
+namespace 语言 名称空间字符串
+
+#例如，生成java语言名称空间，其实就是包路径com.lisk.demo
+namespace java com.lisk.demo
+
+#定义结构体
+struct 结构体名称 {
+
+}
+
+#例如，定义一个java类
+struct Person {
+
+}
+
+
+#基本数据类型
+bool     布尔值             1字节
+i8       有符号整数         1字节
+i16      有符号整数         2字节
+i32      有符号整数         4字节
+i64      有符号整数         8字节
+double   浮点数             8字节
+string   字符串
+binary   二进制大对象(python中string，java中ByteBuffer)
+map<t1,t2> 键值对
+list<t1> 列表
+set<t1>  散列集
+
+
+#定义类的属性
+struct Person {
+  1:required i64 pid,                      #required，该关键字可以省略，默认就是required
+  2:string name,
+  3:i32 age,
+  4:optional string address,               #optional，表示该字段在没有赋值的情况，不会被序列化
+}
+
+#定义服务接口
+service IPurchaseInput {
+  void ping(),
+  i32 count(1:map<string,string> params),
+}
+
+
+
+
+
+
+
+
