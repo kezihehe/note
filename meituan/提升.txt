@@ -1,0 +1,5 @@
+判断参数，参数不满足时抛出异常，使用spring提供的“断言”
+org.springframework.util.Assert
+
+
+

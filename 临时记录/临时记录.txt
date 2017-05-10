@@ -1,0 +1,13 @@
+git@github.com/ynkonghao/aujaker  #孔浩代码生成器
+http://aujaker.konghao.org/
+aujaker.zzsharing.com
+
+
+mac安装pip
+sudo easy_install pip
+
+#mac安装fabric
+sudo pip install fabric
+或者
+sudo easy_install fabric
+
