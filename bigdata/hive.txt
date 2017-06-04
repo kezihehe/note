@@ -1,0 +1,33 @@
+1. 安装jdk
+
+2. 安装hadoop
+
+3. tar -zxvf apache-hive.xxx.tar.gz
+   mv apache-hive /usr/local/server
+   ln -s
+   
+4. 配置环境变量
+   HIVE_HOME
+   PATH
+   
+5. 配置hive
+   在$HIVE_HOME/conf/hive-env.sh配置HADOOP_HOME
+   
+6. 配置hive的元数据库
+   cd $HIVE_HOME/conf
+   cp hive-default.xml.template hive-site.xml
+   vim hive-site.xml
+   
+7. 初始化关系型数据库hive的schema
+   $HIVE_HOME/bin/schematool -initSchema -dbType [derby|mysql]
+   
+8. 启动
+   启动hadoop
+   启动hive:$HIVE_HOME/bin/hive     
+   
+   
+
+
+
+
+

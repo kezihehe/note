@@ -1,0 +1,21 @@
+spring提供了两种类型的IOC容器实现
+(1) BeanFactory:IOC容器的基本实现
+(2) ApplicationContext:提供了更多的高级特性，是BeanFactory的子接口
+无论使用任何形式，配置文件是相同的。
+
+ApplicationContext的主要实现类：
+(1) ClassPathXmlApplicationContext
+(2) FileSystemXmlApplicationContext
+
+ConfigurableApplicationContext扩展于ApplicationContext,
+增加了refresh()和close()方法，使ApplicationContext
+具有了启动、刷新和关闭上下文的能力。
+
+WebApplicationContext是专门为WEB应用而准备的，
+它允许从相对于WEB根目录的路径中完成初始化工作。
+
+spring支持三种依赖注入方式
+属性注入
+构造器注入:index,type 区分重载的构造器
+工厂注入
+

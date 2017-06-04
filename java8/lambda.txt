@@ -1,0 +1,70 @@
+->
+左侧：参数列表
+右侧：方法体，即实现代码
+
+lambda需要函数式接口的支持
+函数式接口：接口中只有一个抽象方法的接口，用@FunctionalInterface注解修饰
+
+
+语法格式：
+1. 无参数，无返回值
+()->{}
+Runnable r = ()-> System.out.println("Hello Lambda");  //实现多线程
+
+2. 只有一个参数，小括号可以不些
+如果方法体只有一条语句，则{}和return都可以省略不写
+lambda表达式的参数类型可以省略不写，JVM编译器可以通过上下文推断出数据类型，称为“数据推断”
+但是要是有一个参数写了数据类型，其他参数也必须写。
+
+java8内置的4大函数式接口
+Consumer<T>消费型接口
+  void accept(T t);
+Supplier<T>供给型接口
+  T get();
+Function<T,R>函数型接口
+  R apply(T t);
+Predicate<T>断言型接口
+  boolean test(T t);
+
+方法引用：lambda表达式的另一种表现形式
+三种语法格式
+对象::实例方法名
+类::静态方法名
+类::实例方法名
+
+stu.getName();
+stu::getName;
+Integer.compare(x,y);
+Integer::compare;
+
+构造器引用
+new Student();
+Student::new;
+
+数组引用
+数据类型[]::new;
+new String[x];
+String[]::new;
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+  
+  
+  
+

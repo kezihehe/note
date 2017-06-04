@@ -1,0 +1,38 @@
+1. spring各个模块之间的依赖关系
+
+2. 
+
+spring-jdbc:提供数据源事务管理类，DataSourceTransactionManager
+
+异常
+java.lang.ClassNotFoundException: org.aspectj.weaver.reflect.ReflectionWorld$ReflectionWorldException
+
+
+<!-- 添加servlet3.0核心包 -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>3.0.1</version>
+</dependency>
+<dependency>
+    <groupId>javax.servlet.jsp</groupId>
+    <artifactId>javax.servlet.jsp-api</artifactId>
+    <version>2.3.2-b01</version>
+</dependency>
+<!-- jstl -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+
+
+
+
+
+
+
+
+
+
+

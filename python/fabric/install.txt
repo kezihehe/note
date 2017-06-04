@@ -1,0 +1,11 @@
+centos环境下，更新epel
+yum -y install epel-release*
+
+安装python-pip
+yum -y install python-pip
+或者安装easy_intall
+
+安装fabric
+yum -y install fabric
+
+
