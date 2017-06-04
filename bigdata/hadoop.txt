@@ -1,0 +1,124 @@
+安装
+1. 安装jdk
+   export JAVA_HOME=/usr/local/jdk
+   export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+   export PATH=$JAVA_HOME/bin:$PATH
+
+
+2. 解压压缩包到指定路径
+   建立软连接
+   
+3. 配置环境变量
+   export HADOOP_HOME=/usr/local/hadoop
+   export PATH=$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH
+
+4. 验证hadoop是否安装成功
+   hadoop version
+以上步骤完成之后，hadoop本地模式安装完毕
+hadoop fs -ls #查看文件
+
+################ hadoop 伪分布模式 #######################
+
+5. 配置HADOOP_HOME/etc/hadoop/hadoop-env.sh
+   export JAVA_HOME=${JAVA_HOME}修改为具体jdk所在路径
+   export JAVA_HOME=/usr/local/jdk
+
+6. HADOOP_HOME/etc/hadoop文件中4个xx-site.xml配置
+
+core-site.xml 配置文件系统为hdfs文件系统
+<configuration>
+	<!-- file system properties -->
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://localhost:8020/</value>
+	</property>
+</configuration>
+
+hdfs-site.xml 配置副本数量，完全分布模式下，默认为3
+<configuration>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+</configuration>
+
+mapred-site.xml 配置mapreduce框架名称为yarn
+<configuration>
+	<property>
+		<name>mapreduce.framework.name</name>
+		<value>yarn</value>
+	</property>
+</configuration>
+
+yarn-site.xml 配置资源调度框架
+<configuration>
+	<property>
+		<name>yarn.resourcemanager.hostname</name>
+		<value>localhost</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.aux-services</name>
+		<value>mapreduce_shuffle</value>
+	</property>
+</configuration>
+
+7. 配置SSH免密码登陆
+	ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+	#authorized_keys是公钥库，存放了所有其他主机的公钥
+	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+	ssh localhost #验证免密码是否成功
+	
+8. 格式化，创建hdfs文件系统
+   hadoop namenode -format  #该命令已过时
+   hdfs namenode -format    #推荐命令
+   
+9. 到此，完成伪分布式配置，启动服务
+   start-all.sh      #启动5个进程，已过时
+   stop-all.sh       #结束5个进程，已过时
+   start-dfs.sh      #启动hdfs进程，推荐使用
+   stop-dfs.sh       #结束hdfs进程，推荐使用
+   start-yarn.sh     #启动yarn进程，推荐使用
+   stop-yarn.sh      #结束yarn进程，推荐使用
+   
+10. jps验证是否启动成功  
+   
+
+webUI访问hdfs系统
+http://localhost:50070 
+50075  DataNode
+50090  2NN 
+   
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

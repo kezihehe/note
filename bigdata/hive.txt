@@ -2,21 +2,32 @@
 
 2. 安装hadoop
 
-3. tar -zxvf apache-hive.xxx.tar.gz
-   mv apache-hive /usr/local/server
-   ln -s
-   
+3. mysql安装
+
+3. 解压安装
+   tar -axvf apache-hive-2.1.1-bin.tar.gz -C /usr/local/server/;
+   cd /usr/local;
+   ln -s ./server/apache-hive-2.1.1-bin hive;
+
 4. 配置环境变量
-   HIVE_HOME
-   PATH
+   vim /etc/profile
+   export HIVE_HOME=/usr/local/hive
+   export PATH=$HIVE_HOME/bin:$PATH
+   . /etc/profile
    
 5. 配置hive
    在$HIVE_HOME/conf/hive-env.sh配置HADOOP_HOME
+   cp hive-env.sh.template hive-env.sh
+   vim hive-env.sh
+   HADOOP_HOME=/usr/local/hadoop
    
 6. 配置hive的元数据库
    cd $HIVE_HOME/conf
    cp hive-default.xml.template hive-site.xml
    vim hive-site.xml
+   
+7. 替换变量值
+   ${system:java.io.tmpdir}/${system:user.name}
    
 7. 初始化关系型数据库hive的schema
    $HIVE_HOME/bin/schematool -initSchema -dbType [derby|mysql]

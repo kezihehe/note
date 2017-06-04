@@ -1,0 +1,22 @@
+hadoop包含四个模块
+  Hadoop Common：
+    公共模块，支持其他模块的工具模块
+  Hadoop Distributed File System(HDFS)：
+    分布式文件系统，提供对应用程序的高吞吐量访问
+  Hadoop Yarn：
+    资源调度框架
+  Hadoop MapReduce:
+    hadoop编程模型，映射化简
+
+	
+在$HADOOP_HOME/share/hadoop/文件下下有这些模块的jar包
+
+
+HDFS系统结构：解决大数据的存储
+NameNode           名称节点
+DataNode           数据节点
+SecondaryNameNode  辅助名称节点
+
+YARN结构：解决大数据的计算
+ResourceManager    资源管理器RM
+NodeManager        节点管理器NM

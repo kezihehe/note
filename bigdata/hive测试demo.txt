@@ -1,0 +1,44 @@
+#查看数据库列表
+show databases;
+
+#创建数据库
+create database myhive;
+
+#使用数据库
+use myhive;
+
+#查看表列表
+show tables;
+
+#创建一张员工表
+CREATE TABLE IF NOT EXISTS employee ( eid int, name String,
+salary String, destination String)
+COMMENT 'Employee details'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+#创建格式化数据emp.txt
+1201	Gopal	45000	Technical manager
+1202	Manisha	45000	Proof reader
+1203	Masthanvali	40000	Technical writer
+1204	Kiran	40000	Hr Admin
+1205	Kranthi	30000	Op Admin
+
+#加载结构化数据(emp.txt)到hive
+LOAD DATA LOCAL INPATH '/root/test/emp.txt' OVERWRITE INTO TABLE employee;
+
+#查询结果
+select * from employee;
+
+
+
+
+
+
+
+
+
+
+
